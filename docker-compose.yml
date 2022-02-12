@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  db-w1:
+    image: mysql:5.7
+    volumes:
+      - db-volume-w1:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306
+  db-r1:
+    image: mysql:5.7
+    volumes:
+      - db-volume-r1:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 13306:3306
+
+  db-w2:
+    image: mysql:5.7
+    volumes:
+      - db-volume-w2:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3307:3306
+  db-r2:
+    image: mysql:5.7
+    volumes:
+      - db-volume-r2:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 13307:3306
+
+volumes:
+  db-volume-w1:
+  db-volume-r1:
+  db-volume-w2:
+  db-volume-r2:
