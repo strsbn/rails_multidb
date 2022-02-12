@@ -14,12 +14,46 @@ default: &default
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password:
-  host: localhost
+  password: password
 
 development:
-  <<: *default
-  database: multidb_development
+  primary:
+    <<: *default
+    database: multidb_primary
+    host: 127.0.0.1
+    port: 3306
+  primary_replica:
+    <<: *default
+    database: multidb_primary
+    host: 127.0.0.1
+    port: 13306
+    replica: true
+
+  animals:
+    <<: *default
+    database: multidb_animals
+    host: 127.0.0.1
+    port: 3307
+    migrations_paths: db/animals_migrate
+  animals_replica:
+    <<: *default
+    database: multidb_animals
+    host: 127.0.0.1
+    port: 13307
+    replica: true
+
+  animals2:
+    <<: *default
+    database: multidb_animals
+    host: 127.0.0.1
+    port: 3308
+    migrations_paths: db/animals_migrate
+  animals2_replica:
+    <<: *default
+    database: multidb_animals
+    host: 127.0.0.1
+    port: 13308
+    replica: true
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
